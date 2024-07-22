@@ -7,15 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Groups.Clans.dto.request.ClanGetRequest;
+import com.Groups.Clans.dto.request.ClanRequest;
+import com.Groups.Clans.dto.request.ClanUpdateRequest;
 import com.Groups.Clans.entities.Clan;
 import com.Groups.Clans.services.abstract_services.IClanService;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
-@RequestMapping(path = "/clan")
+@RequestMapping(path = "/clans")
 @AllArgsConstructor
 public class ClanController {
 
@@ -40,6 +47,21 @@ public class ClanController {
                 .cohortId(cohortId)
                 .build();
         return ResponseEntity.ok(this.iClanService.findAll(req));
+    }
+
+    @PostMapping
+    public ResponseEntity<Clan> create(@RequestBody ClanRequest clanRequest) {
+        return ResponseEntity.ok(this.iClanService.create(clanRequest));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Clan> update(@PathVariable Long id, @RequestBody ClanUpdateRequest clanUpdateRequest) {
+        return ResponseEntity.ok(this.iClanService.update(id, clanUpdateRequest));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Clan> disable(@PathVariable Long id) {
+        return ResponseEntity.ok(this.iClanService.disable(id));
     }
 
 }
