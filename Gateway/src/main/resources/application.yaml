@@ -18,6 +18,10 @@ spring:
           uri: lb://clans
           predicates:
             - Path=/clans/**
+        - id: team_leader_service
+          uri: lb://team-leaders
+          predicates:
+            - Path=/team-leaders/**
 
 server:
   port: 8080

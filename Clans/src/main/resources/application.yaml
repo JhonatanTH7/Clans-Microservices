@@ -1,6 +1,6 @@
 spring:
   application:
-    name: clans
+    name: Clans
 
   datasource:
     url: jdbc:mysql://localhost:3307/riwi_db_meta
